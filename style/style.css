@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Montserrat:wght@400;600&display=swap');
+
+*{/*quando queremos colocar uma infomração para todos*/
+    margin: 0;
+    padding: 0;
+}
+body{
+    /*height: 100vh;*/
+    box-sizing: border-box;
+    background-color: black;
+    color: #F6F6F6;
+}
+.titulo-destaque{
+    color: #C5160B;
+}
+
+.apresentacao_perfil{
+    width: 450px;
+    border-radius: 20px;
+}
+.apresentacao{
+    padding: 6.2% 15%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.apresentacao__conteudo{
+    width: 615px;/*635*/
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.apresentacao__conteudo__titulo{
+    font-weight: bold;
+    font-family: 'Krona One', sans-serif;
+    font-style: italic;
+    font-size: 28px;
+}
+.apresentacao__conteudo__texto{
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    font-style: italic;
+    font-size: 19px;
+    text-align: justify-all;
+}
+.apresentacao__links{
+/*quando criamos um display: flex; automaticamente informamos que ficara na posição ROW (linha), 
+ou seja, para ser em coluna precisamos colocar o flex-direction: column;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+/*align-items tem como função de centralizar os elementos de forma vertical (por causa do flex-direction: column)*/
+    align-items: center;
+    gap: 15px; /*gap tem como função de colocar espaçamento entre os elementos*/
+}
+
+.apresentacao__links_link{
+    /* background-color: #C5160B; */
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    border: 2px solid #C5160B;
+    width: 400px;
+    text-align: center;
+    border-radius: 15px;
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
+    padding: 15px 0; /*1° valor é vertical e o 2° é horizontal*/
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+}
+.apresentacao__links_link:hover{
+    background-color: #272727;
+    color: #C5160B;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.apresentacao__links__subtitulos{
+    font-family: 'Krona One', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+}
+.apresentacao__conteudo__subtitulo{
+    font-weight: normal;
+    text-decoration: underline;
+    font-family: 'Krona One', sans-serif;
+    font-size: 17px;
+    color: #C5160B;
+}
+.Rodape{
+    padding: 24px;
+    color: black;
+    background-color: #C5160B;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+}
+.Cabecalho{
+    padding: 5% 0% 0% 10%;   
+}
+.Cabecalho__menu{
+    display: flex;
+    gap: 80px;
+}
+.Cabecalho__menu__link{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #C5160B;
+    text-decoration: none;
+}
+.Cabecalho__menu__link:hover{
+    color: white;
+}
