@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Montserrat:wght@400;600&display=swap');
 
+:root{
+    --cor--preta: black;
+    --cor--branca: white;
+    --cor--vermelha:#C5160B;
+    --cor--hover:#272727;
+
+    --fonte--primaria: 'Krona One', sans-serif;
+    --fonte_secundaria: 'Montserrat', sans-serif;
+}
+
 *{/*quando queremos colocar uma infomração para todos*/
     margin: 0;
     padding: 0;
@@ -7,11 +17,11 @@
 body{
     /*height: 100vh;*/
     box-sizing: border-box;
-    background-color: black;
-    color: #F6F6F6;
+    background-color: var(--cor--preta);
+    color: var(--cor--branca);
 }
 .titulo-destaque{
-    color: #C5160B;
+    color: var(--cor--vermelha);
 }
 
 .apresentacao_perfil{
@@ -32,13 +42,13 @@ body{
 }
 .apresentacao__conteudo__titulo{
     font-weight: bold;
-    font-family: 'Krona One', sans-serif;
+    font-family: var(--fonte--primaria);
     font-style: italic;
     font-size: 28px;
 }
 .apresentacao__conteudo__texto{
     font-weight: bold;
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--fonte_secundaria);
     font-style: italic;
     font-size: 19px;
     text-align: justify-all;
@@ -59,7 +69,7 @@ ou seja, para ser em coluna precisamos colocar o flex-direction: column;*/
     display: flex;
     justify-content: center;
     gap: 16px;
-    border: 2px solid #C5160B;
+    border: 2px solid var(--cor--vermelha);
     width: 400px;
     text-align: center;
     border-radius: 15px;
@@ -67,34 +77,34 @@ ou seja, para ser em coluna precisamos colocar o flex-direction: column;*/
     font-weight: 500;
     color: white;
     padding: 15px 0; /*1° valor é vertical e o 2° é horizontal*/
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--fonte_secundaria);
     text-decoration: none;
 }
 .apresentacao__links_link:hover{
-    background-color: #272727;
-    color: #C5160B;
+    background-color: var(--cor--hover);
+    color: var(--cor--vermelha);
     font-style: italic;
     font-weight: bold;
 }
 
 .apresentacao__links__subtitulos{
-    font-family: 'Krona One', sans-serif;
+    font-family: var(--fonte--primaria);
     font-weight: 400;
     font-size: 20px;
 }
 .apresentacao__conteudo__subtitulo{
     font-weight: normal;
     text-decoration: underline;
-    font-family: 'Krona One', sans-serif;
+    font-family: var(--fonte--primaria);
     font-size: 17px;
-    color: #C5160B;
+    color: var(--cor--vermelha);
 }
 .Rodape{
     padding: 24px;
-    color: black;
-    background-color: #C5160B;
+    color: var(--cor--preta);
+    background-color: var(--cor--vermelha);
     text-align: center;
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--fonte_secundaria);
     font-size: 24px;
     font-weight: 400;
 }
@@ -106,12 +116,12 @@ ou seja, para ser em coluna precisamos colocar o flex-direction: column;*/
     gap: 80px;
 }
 .Cabecalho__menu__link{
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--fonte_secundaria);
     font-size: 24px;
     font-weight: 600;
-    color: #C5160B;
+    color: var(--cor--vermelha);
     text-decoration: none;
 }
 .Cabecalho__menu__link:hover{
-    color: white;
+    color: var(--cor--branca);
 }
