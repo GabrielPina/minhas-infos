@@ -53,7 +53,7 @@ body{
     font-family: var(--fonte_secundaria);
     font-style: italic;
     font-size: 1.18rem;
-    text-align: justify-all;
+    text-align: justify;
 }
 .apresentacao__links{
 /*quando criamos um display: flex; automaticamente informamos que ficara na posição ROW (linha), 
