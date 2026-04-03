@@ -5,3 +5,5 @@ Para abrir o projeto é necessário ter o VisualStudio Code instalado
 ```
 
 Projeto foi realizado atráves das aulas da Alura, no curso de Front-End de HTML e CSS.
+
+Projeto foi melhorado em 2026.
