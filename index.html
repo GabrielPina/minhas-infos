@@ -1,43 +1,964 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="./style/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gabriel Moreira Pina — Engenheiro de Dados</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── RESET & TOKENS ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:    #D50000;
+      --red-dk: #9B0000;
+      --white:  #F5F0EB;
+      --black:  #0A0A0A;
+      --gray:   #1A1A1A;
+      --gray2:  #272727;
+      --gray3:  #3A3A3A;
+      --muted:  #888;
+
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body:    'DM Sans', sans-serif;
+      --font-mono:    'DM Mono', monospace;
+
+      --transition: 0.35s cubic-bezier(.4,0,.2,1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NOISE TEXTURE OVERLAY ──────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ────────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 6%;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--gray3);
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      letter-spacing: 2px;
+      color: var(--white);
+    }
+
+    .nav-logo span { color: var(--red); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color var(--transition);
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      background: var(--red);
+      color: var(--white) !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 4px;
+      font-weight: 600 !important;
+      transition: background var(--transition) !important;
+    }
+
+    .nav-cta:hover { background: var(--red-dk) !important; color: var(--white) !important; }
+
+    /* ── HERO ───────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 8rem 6% 5rem;
+      gap: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* diagonal red stripe */
+    #hero::after {
+      content: '';
+      position: absolute;
+      top: -10%;
+      right: -5%;
+      width: 55%;
+      height: 130%;
+      background: linear-gradient(160deg, var(--red) 0%, var(--red-dk) 60%, transparent 100%);
+      clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%);
+      opacity: 0.08;
+      pointer-events: none;
+    }
+
+    .hero-text { position: relative; z-index: 1; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--red);
+      border: 1px solid var(--red);
+      padding: 0.35rem 0.9rem;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--red);
+      border-radius: 50%;
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.4; transform: scale(0.7); }
+    }
+
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 7vw, 6.5rem);
+      line-height: 0.92;
+      letter-spacing: 1px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-name em {
+      display: block;
+      color: var(--red);
+      font-style: normal;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: #AAA;
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.8rem;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      transition: all var(--transition);
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--red);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background: var(--red-dk);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(213,0,0,0.35);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid var(--gray3);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    /* hero photo */
+    .hero-visual {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .photo-frame {
+      position: relative;
+      width: clamp(260px, 38vw, 420px);
+    }
+
+    .photo-frame::before {
+      content: '';
+      position: absolute;
+      inset: -12px;
+      border: 2px solid var(--red);
+      border-radius: 16px;
+      opacity: 0.5;
+      transform: rotate(2deg);
+    }
+
+    .photo-frame img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      border-radius: 12px;
+      display: block;
+      filter: grayscale(20%) contrast(1.05);
+    }
+
+    .photo-tag {
+      position: absolute;
+      bottom: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--red);
+      color: var(--white);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 1.5px;
+      padding: 0.4rem 1.2rem;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    /* ── SECTION COMMONS ────────────────────────────────────────── */
+    section {
+      padding: 5.5rem 6%;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      letter-spacing: 1px;
+      margin-bottom: 3.5rem;
+      line-height: 1;
+    }
+
+    .divider {
+      width: 48px;
+      height: 3px;
+      background: var(--red);
+      margin: 1rem 0 3rem;
+    }
+
+    /* ── SKILLS STRIP ───────────────────────────────────────────── */
+    #skills {
+      background: var(--gray);
+      border-top: 1px solid var(--gray3);
+      border-bottom: 1px solid var(--gray3);
+    }
+
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .skill-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--gray2);
+      border: 1px solid var(--gray3);
+      color: var(--white);
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: all var(--transition);
+    }
+
+    .skill-chip:hover {
+      border-color: var(--red);
+      color: var(--red);
+      transform: translateY(-3px);
+    }
+
+    .skill-chip .dot {
+      width: 7px; height: 7px;
+      background: var(--red);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .skill-chip.soft {
+      background: rgba(213,0,0,0.08);
+      border-color: rgba(213,0,0,0.25);
+    }
+    .skill-chip.soft:hover {
+      background: rgba(213,0,0,0.18);
+    }
+
+    /* ── ABOUT ──────────────────────────────────────────────────── */
+    #about {
+      background: var(--black);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: #AAA;
+      font-size: 1rem;
+      margin-bottom: 1.2rem;
+      line-height: 1.85;
+    }
+
+    .about-text strong { color: var(--white); }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .stat-card {
+      background: var(--gray);
+      border: 1px solid var(--gray3);
+      border-radius: 8px;
+      padding: 1.8rem 1.5rem;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+
+    .stat-card:hover {
+      border-color: var(--red);
+      transform: translateY(-4px);
+    }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      color: var(--red);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .stat-label {
+      font-size: 0.82rem;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+    }
+
+    /* ── EXPERIENCE ─────────────────────────────────────────────── */
+    #experience {
+      background: var(--gray);
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--red), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 3rem;
+      padding-left: 2rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.5rem;
+      top: 0.4rem;
+      width: 12px; height: 12px;
+      background: var(--red);
+      border-radius: 50%;
+      border: 2px solid var(--black);
+      box-shadow: 0 0 0 3px rgba(213,0,0,0.25);
+    }
+
+    .timeline-company {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.2rem;
+    }
+
+    .timeline-role {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--red);
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+    }
+
+    .timeline-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .timeline-list li {
+      color: #999;
+      font-size: 0.92rem;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .timeline-list li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--red);
+      font-weight: bold;
+    }
+
+    /* ── EDUCATION ──────────────────────────────────────────────── */
+    #education {
+      background: var(--black);
+    }
+
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .edu-card {
+      background: var(--gray);
+      border: 1px solid var(--gray3);
+      border-radius: 10px;
+      padding: 2rem;
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .edu-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--red);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transition);
+    }
+
+    .edu-card:hover { transform: translateY(-5px); border-color: var(--gray2); }
+    .edu-card:hover::before { transform: scaleX(1); }
+
+    .edu-type {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.8rem;
+    }
+
+    .edu-institution {
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .edu-course {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .courses-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+    }
+
+    .course-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      background: var(--gray2);
+      border-radius: 6px;
+      padding: 0.7rem 1rem;
+      font-size: 0.88rem;
+      color: #AAA;
+    }
+
+    .course-item span { color: var(--red); flex-shrink: 0; margin-top: 2px; }
+
+    /* ── CONTACT ────────────────────────────────────────────────── */
+    #contact {
+      background: var(--gray);
+      text-align: center;
+    }
+
+    .contact-desc {
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 3rem;
+      font-size: 1rem;
+    }
+
+    .social-row {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.9rem 1.8rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      transition: all var(--transition);
+      border: 1px solid var(--gray3);
+      color: var(--white);
+      background: var(--gray2);
+    }
+
+    .social-btn:hover {
+      background: var(--red);
+      border-color: var(--red);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(213,0,0,0.3);
+    }
+
+    /* ── FOOTER ─────────────────────────────────────────────────── */
+    footer {
+      background: var(--black);
+      border-top: 1px solid var(--gray3);
+      text-align: center;
+      padding: 2rem 6%;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-family: var(--font-mono);
+    }
+
+    footer span { color: var(--red); }
+
+    /* ── SCROLL ANIMATIONS ──────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── MOBILE ─────────────────────────────────────────────────── */
+    @media (max-width: 860px) {
+      #hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 7rem;
+      }
+
+      .hero-visual { order: -1; }
+
+      .hero-desc { margin: 0 auto 2.5rem; }
+
+      .hero-actions { justify-content: center; }
+
+      .hero-badge { justify-content: center; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 520px) {
+      .about-stats { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
 </head>
 <body>
-    <header class="Cabecalho">
-        <nav class="Cabecalho__menu">
-            <a class="Cabecalho__menu__link" href="index.html">Home</a>
-            <a class="Cabecalho__menu__link" href="about.html">Sobre mim</a>
-            <a class="Cabecalho__menu__link" href="experience.html">Experiências Profissionais</a>
-            <a class="Cabecalho__menu__link" href="qualification.html">Formação</a>
-        </nav>
-    </header>
-    <main class="apresentacao">
-        <section class="apresentacao__conteudo">
-            <h1 class="apresentacao__conteudo__titulo">Profissional <strong class="titulo-destaque">Gabriel Moreira Pina</strong></h1>
-            <p class="apresentacao__conteudo__texto">
-                Estou a procura de oportunidade como Desenvolvedor Jr/Analista Jr voltado para Front-End (HTML, CSS e JavaScript) ou C#(WinForm).
-                </p>
-            <div class="apresentacao__links">
-                <h2 class="apresentacao__links__subtitulos">Acesse minhas redes socias:</h2>
-                <a class="apresentacao__links_navegacao" href="https://www.instagram.com/gm_pinaa9/">Instagram
-                    <!-- <img src="./assets/instagram.png" class="apresentacao__links__imagem">Instagram -->
-                </a>
-                <a class="apresentacao__links_navegacao" href="https://github.com/GabrielPina">GitHub
-                   <!-- <img src="./assets/github.png" class="apresentacao__links__imagem">GitHub --> 
-                </a>
-                <a class="apresentacao__links_navegacao" href="https://www.linkedin.com/in/gbrmoreira9/">LinkedIn
-                   <!-- <img src="./assets/linkedin.png" class="apresentacao__links__imagem">LinkedIn --> 
-                </a>
-            </div>
-        </section>
-        <img class="apresentacao_imagem" src="./assets/Perfil.jpeg" alt="Foto do de perfil do Gabriel">
-    </main>
-    <footer class="Rodape">
-        <p>Desenvolvido por Gabriel Moreira Pina</p>
-    </footer>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">GM<span>.</span>PINA</div>
+    <ul class="nav-links">
+      <li><a href="#about">Sobre</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experiência</a></li>
+      <li><a href="#education">Formação</a></li>
+      <li><a href="#languages">Idiomas</a></li>
+      <li><a href="#contact" class="nav-cta">Contato</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-text">
+      <div class="hero-badge">Disponível para oportunidades</div>
+      <h1 class="hero-name">
+        Gabriel<br>
+        Moreira<br>
+        <em>Pina</em>
+      </h1>
+      <p class="hero-desc">
+        Engenheiro de Computação e pós-graduando em Engenharia de Dados. Com sólida experiência em SQL Server, ETL, Python e análise de dados. Buscando atuar como <strong>Engenheiro de Dados</strong> ou <strong>Analista de Dados</strong>.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">Entre em contato</a>
+        <a href="#experience" class="btn btn-outline">Ver experiências</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="photo-frame">
+        <img src="./assets/Perfil.png" alt="Gabriel Moreira Pina" />
+        <div class="photo-tag">São Paulo, SP · Brasil</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <p class="section-label">Stack técnica</p>
+    <h2 class="section-title">Tecnologias</h2>
+    <div class="skills-grid" style="margin-bottom: 3rem;">
+      <div class="skill-chip"><span class="dot"></span>SQL Server</div>
+      <div class="skill-chip"><span class="dot"></span>Python</div>
+      <div class="skill-chip"><span class="dot"></span>Power BI</div>
+      <div class="skill-chip"><span class="dot"></span>Power Automate</div>
+      <div class="skill-chip"><span class="dot"></span>ETL / SSIS</div>
+      <div class="skill-chip"><span class="dot"></span>Azure (Fabric · Synapse)</div>
+      <div class="skill-chip"><span class="dot"></span>Apache Airflow</div>
+      <div class="skill-chip"><span class="dot"></span>NumPy · Pandas</div>
+      <div class="skill-chip"><span class="dot"></span>C# / WinForm</div>
+      <div class="skill-chip"><span class="dot"></span>HTML5 · CSS3</div>
+      <div class="skill-chip"><span class="dot"></span>Git · GitHub</div>
+      <div class="skill-chip"><span class="dot"></span>JIRA · Azure DevOps</div>
+      <div class="skill-chip"><span class="dot"></span>Movidesk</div>
+      <div class="skill-chip"><span class="dot"></span>ERP Sisloc</div>
+      <div class="skill-chip"><span class="dot"></span>Protheus / SAP</div>
+      <div class="skill-chip"><span class="dot"></span>Linux CLI</div>
+      <div class="skill-chip"><span class="dot"></span>Excel</div>
+    </div>
+
+    <p class="section-label">Perfil profissional</p>
+    <h2 class="section-title" style="font-size: clamp(1.8rem, 3vw, 2.8rem); margin-bottom: 1.5rem;">Soft Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-chip soft"><span>🎯</span>Organizado</div>
+      <div class="skill-chip soft"><span>💼</span>Forte sentimento de dono</div>
+      <div class="skill-chip soft"><span>🗣️</span>Comunicativo</div>
+      <div class="skill-chip soft"><span>⚡</span>Proativo</div>
+      <div class="skill-chip soft"><span>✅</span>Qualidade no trabalho</div>
+      <div class="skill-chip soft"><span>🔍</span>Curioso</div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <p class="section-label">Quem sou eu</p>
+        <h2 class="section-title">Sobre mim</h2>
+        <div class="divider"></div>
+        <p>
+          Técnico em Informática, graduado em <strong>Engenharia da Computação</strong> e pós-graduando em <strong>Engenharia de Dados</strong>. Com mais de 6 anos de experiência em TI, atuei em infraestrutura, desenvolvimento de sistemas e, atualmente, como <strong>Analista de Sistemas</strong>.
+        </p>
+        <p>
+          Ao longo da carreira, desenvolvi sólida experiência em <strong>SQL Server</strong>, processos de <strong>ETL (SSIS)</strong>, Data Warehousing e análise de causa raiz. Hoje, estou focado em expandir minha atuação em <strong>Python, Power BI</strong> e no ecossistema <strong>Azure</strong> — incluindo Fabric e Synapse Analytics.
+        </p>
+        <p>
+          Sou comunicativo, proativo e orientado a resultado, sempre buscando aprendizado contínuo e colaboração com o time.
+        </p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-number">6+</div>
+          <div class="stat-label">Anos em tecnologia</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">4</div>
+          <div class="stat-label">Empresas de experiência</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">MBA</div>
+          <div class="stat-label">Engenharia de Dados · Impacta</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">DE</div>
+          <div class="stat-label">Buscando oportunidade Eng. / Analista de Dados</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <p class="section-label">Carreira</p>
+    <h2 class="section-title">Experiência Profissional</h2>
+    <div class="divider"></div>
+
+    <div class="timeline reveal">
+      <div class="timeline-item">
+        <div class="timeline-company">Tecnogera Energia e Equipamentos</div>
+        <div class="timeline-role">Analista de Sistemas · Tempo Integral</div>
+        <ul class="timeline-list">
+          <li>Responsável pelos atendimentos de chamados na plataforma Movidesk</li>
+          <li>Responsável pelo ERP Sisloc</li>
+          <li>Manutenção e criação de Procedures, Views e Triggers</li>
+          <li>Otimização de consultas SQL</li>
+          <li>Direcionamento de causa raiz</li>
+          <li>Automação de atividades utilizando o Power Automate</li>
+          <li>Desenvolvimento de Dashboards em Power BI</li>
+          <li>Desenvolvimento em Python</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-company">Neogrid Informática LTDA</div>
+        <div class="timeline-role">Analista de Sistemas</div>
+        <ul class="timeline-list">
+          <li>Atendimento de chamados — Times Nível 1 e Onboarding</li>
+          <li>Atuação no cadastro de novos clientes na base de produção</li>
+          <li>Análise e manutenção via Banco de Dados SQL Server</li>
+          <li>Análise e direcionamento de melhorias em ETL (SSIS), T-SQL, C# e Java</li>
+          <li>Publicação em Produção utilizando o Bamboo</li>
+          <li>Vivência com o ambiente Azure</li>
+          <li>Atendimento de chamados via JIRA e Azure DevOps</li>
+          <li>Levantamento de causas raízes dos chamados abertos</li>
+          <li>Documentação de processos internos do time</li>
+          <li>Extração de relatórios no banco de dados</li>
+          <li>Desenvolvimento de projetos de melhoria</li>
+          <li>Manutenção de Procedures, Views e Triggers</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-company">Paranoá Indústria de Borracha S.A</div>
+        <div class="timeline-role">Estagiário — Desenvolvimento & TI</div>
+        <ul class="timeline-list">
+          <li>Desenvolvimento de aplicações em C#</li>
+          <li>Criação e otimização de queries no SQL Server</li>
+          <li>Formatação de máquinas e instalação de Sistemas Operacionais</li>
+          <li>Organização e controle de IPs na rede interna</li>
+          <li>Abertura de Solicitações de Compra no sistema Protheus</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-company">Arfrio S.A.</div>
+        <div class="timeline-role">Estagiário — Infraestrutura de TI</div>
+        <ul class="timeline-list">
+          <li>Gerenciamento e manutenção de máquinas e softwares corporativos</li>
+          <li>Atendimento e suporte presencial e remoto a funcionários</li>
+          <li>Acompanhamento de backups de servidores</li>
+          <li>Coordenação de instalações com empresas terceirizadas</li>
+          <li>Emissão de notas, pedidos e contratos no sistema SAP</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <p class="section-label">Formação</p>
+    <h2 class="section-title">Educação</h2>
+    <div class="divider"></div>
+
+    <div class="edu-grid reveal">
+      <div class="edu-card">
+        <div class="edu-type">Pós-Graduação · MBA</div>
+        <div class="edu-institution">Impacta Tecnologia</div>
+        <div class="edu-course">MBA Data Engineering</div>
+        <div class="edu-course" style="margin-top:0.5rem; color: var(--red); font-size:0.78rem; font-family: var(--font-mono);">Set/2023 — Jan/2025</div>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-type">Graduação</div>
+        <div class="edu-institution">Centro Universitário FAM</div>
+        <div class="edu-course">Bacharelado em Engenharia de Computação</div>
+        <div class="edu-course" style="margin-top:0.5rem; color: var(--red); font-size:0.78rem; font-family: var(--font-mono);">Jul/2016 — Dez/2017</div>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-type">Curso Técnico</div>
+        <div class="edu-institution">Etec Jucelino Kubitschek de Oliveira</div>
+        <div class="edu-course">Técnico em Informática — Tecnologia da Informação</div>
+        <div class="edu-course" style="margin-top:0.5rem; color: var(--red); font-size:0.78rem; font-family: var(--font-mono);">Jan/2018 — Dez/2022</div>
+      </div>
+
+      <div class="edu-card" style="grid-column: 1 / -1;">
+        <div class="edu-type">Cursos Complementares</div>
+        <div class="courses-list">
+          <div class="course-item"><span>▸</span><div><strong style="color:var(--white)">Pandas: selecionando e agrupando dados</strong> <span style="color:var(--muted); font-size:0.78rem; margin-left:0.5rem;">Alura · Dez/2025</span></div></div>
+          <div class="course-item"><span>▸</span><div><strong style="color:var(--white)">ETL do Zero com API</strong> <span style="color:var(--muted); font-size:0.78rem; margin-left:0.5rem;">Jornada de Dados · Dez/2025</span></div></div>
+          <div class="course-item"><span>▸</span><div><strong style="color:var(--white)">Python para Dados: funções, estruturas de dados e exceções</strong> <span style="color:var(--muted); font-size:0.78rem; margin-left:0.5rem;">Alura · Nov/2025</span></div></div>
+          <div class="course-item"><span>▸</span><div><strong style="color:var(--white)">NumPy: análise numérica eficiente com Python</strong> <span style="color:var(--muted); font-size:0.78rem; margin-left:0.5rem;">Alura · Nov/2025</span></div></div>
+          <div class="course-item"><span>▸</span><div><strong style="color:var(--white)">Python para Data Science: primeiros passos</strong> <span style="color:var(--muted); font-size:0.78rem; margin-left:0.5rem;">Alura · Set/2025</span></div></div>
+          <div class="course-item"><span>▸</span><div><strong style="color:var(--white)">Masterclass de Análise de Dados com Jupyter (4h)</strong> <span style="color:var(--muted); font-size:0.78rem; margin-left:0.5rem;">Impacta Tecnologia · Jan/2024</span></div></div>
+          <div class="course-item"><span>▸</span><div><strong style="color:var(--white)">Business Intelligence SQL — ETL Integration Services</strong> <span style="color:var(--muted); font-size:0.78rem; margin-left:0.5rem;">Udemy · Jul/2023</span></div></div>
+          <div class="course-item"><span>▸</span><div><strong style="color:var(--white)">Apache Airflow: orquestrando seu primeiro pipeline de dados</strong> <span style="color:var(--muted); font-size:0.78rem; margin-left:0.5rem;">Alura · Jun/2023</span></div></div>
+          <div class="course-item"><span>▸</span><div><strong style="color:var(--white)">Linux Onboarding: usando a CLI de forma rápida e prática</strong> <span style="color:var(--muted); font-size:0.78rem; margin-left:0.5rem;">Alura · Jun/2023</span></div></div>
+          <div class="course-item"><span>▸</span><div><strong style="color:var(--white)">Excel: domine o editor de planilhas</strong> <span style="color:var(--muted); font-size:0.78rem; margin-left:0.5rem;">Alura · Mai/2023</span></div></div>
+          <div class="course-item"><span>▸</span><div><strong style="color:var(--white)">Python: avançando na orientação a objetos</strong> <span style="color:var(--muted); font-size:0.78rem; margin-left:0.5rem;">Alura · Mai/2023</span></div></div>
+          <div class="course-item"><span>▸</span><div><strong style="color:var(--white)">Python: entendendo a Orientação a Objetos</strong> <span style="color:var(--muted); font-size:0.78rem; margin-left:0.5rem;">Alura · Mai/2023</span></div></div>
+          <div class="course-item"><span>▸</span><div><strong style="color:var(--white)">Python: avançando na linguagem</strong> <span style="color:var(--muted); font-size:0.78rem; margin-left:0.5rem;">Alura · Mai/2023</span></div></div>
+          <div class="course-item"><span>▸</span><div><strong style="color:var(--white)">Python: começando com a linguagem</strong> <span style="color:var(--muted); font-size:0.78rem; margin-left:0.5rem;">Alura · Mai/2023</span></div></div>
+          <div class="course-item"><span>▸</span><div><strong style="color:var(--white)">HTML e CSS: responsividade e publicação de projetos</strong> <span style="color:var(--muted); font-size:0.78rem; margin-left:0.5rem;">Alura · Abr/2023</span></div></div>
+          <div class="course-item"><span>▸</span><div><strong style="color:var(--white)">HTML e CSS: Classes, posicionamento e Flexbox</strong> <span style="color:var(--muted); font-size:0.78rem; margin-left:0.5rem;">Alura · Abr/2023</span></div></div>
+          <div class="course-item"><span>▸</span><div><strong style="color:var(--white)">HTML e CSS: cabeçalho, footer e variáveis CSS</strong> <span style="color:var(--muted); font-size:0.78rem; margin-left:0.5rem;">Alura · Abr/2023</span></div></div>
+          <div class="course-item"><span>▸</span><div><strong style="color:var(--white)">HTML e CSS: ambientes de desenvolvimento, estrutura e tags</strong> <span style="color:var(--muted); font-size:0.78rem; margin-left:0.5rem;">Alura · Abr/2023</span></div></div>
+          <div class="course-item"><span>▸</span><div><strong style="color:var(--white)">Git e GitHub: repositório, commit e versões</strong> <span style="color:var(--muted); font-size:0.78rem; margin-left:0.5rem;">Alura · Abr/2023</span></div></div>
+          <div class="course-item"><span>▸</span><div><strong style="color:var(--white)">C#: explorando a linguagem</strong> <span style="color:var(--muted); font-size:0.78rem; margin-left:0.5rem;">Alura · Set/2022</span></div></div>
+          <div class="course-item"><span>▸</span><div><strong style="color:var(--white)">SQL Server: consultas avançadas com Microsoft SQL Server 2017</strong> <span style="color:var(--muted); font-size:0.78rem; margin-left:0.5rem;">Alura · Jan/2022</span></div></div>
+          <div class="course-item"><span>▸</span><div><strong style="color:var(--white)">SQL Server: SQL com Microsoft SQL Server 2019</strong> <span style="color:var(--muted); font-size:0.78rem; margin-left:0.5rem;">Alura · Jan/2022</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LANGUAGES -->
+  <section id="languages" style="background: var(--gray);">
+    <p class="section-label">Comunicação global</p>
+    <h2 class="section-title">Idiomas</h2>
+    <div class="divider"></div>
+    <div class="edu-grid reveal" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); max-width: 700px;">
+      <div class="edu-card" style="text-align:center;">
+        <div style="font-size:2.5rem; margin-bottom:0.8rem;">🇧🇷</div>
+        <div class="edu-institution">Português</div>
+        <div class="edu-type" style="margin-top:0.4rem; letter-spacing:1px;">Nativo</div>
+      </div>
+      <div class="edu-card" style="text-align:center;">
+        <div style="font-size:2.5rem; margin-bottom:0.8rem;">🇬🇧</div>
+        <div class="edu-institution">Inglês</div>
+        <div class="edu-type" style="margin-top:0.4rem; letter-spacing:1px;">Intermediário · B1</div>
+      </div>
+      <div class="edu-card" style="text-align:center;">
+        <div style="font-size:2.5rem; margin-bottom:0.8rem;">🇪🇸</div>
+        <div class="edu-institution">Espanhol</div>
+        <div class="edu-type" style="margin-top:0.4rem; letter-spacing:1px;">Básico</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label">Vamos conversar</p>
+    <h2 class="section-title">Contato</h2>
+    <div class="divider" style="margin: 0 auto 1.5rem;"></div>
+    <p class="contact-desc">
+      Estou em busca de oportunidades como Engenheiro de Dados ou Analista de Dados. Conecte-se comigo nas redes abaixo!
+    </p>
+    <div class="social-row reveal">
+      <a href="https://www.linkedin.com/in/gbrmoreira9/" target="_blank" class="social-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/GabrielPina" target="_blank" class="social-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="https://www.instagram.com/gm_pinaa9/" target="_blank" class="social-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+        Instagram
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Desenvolvido por Gabriel Moreira Pina</p>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Nav active state highlight
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 100) current = s.getAttribute('id');
+      });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--white)' : '';
+      });
+    });
+  </script>
+
 </body>
+</html>
