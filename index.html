@@ -636,6 +636,37 @@
       .nav-links { display: none; }
     }
 
+    /* ── LANGUAGE SWITCHER ─────────────────────────────────────── */
+    .lang-switcher {
+      display: flex;
+      gap: 0.3rem;
+      margin-left: 1rem;
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: 1px solid var(--gray3);
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+      padding: 0.3rem 0.6rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .lang-btn:hover {
+      border-color: var(--white);
+      color: var(--white);
+    }
+
+    .lang-btn.active {
+      background: var(--red);
+      border-color: var(--red);
+      color: var(--white);
+    }
+
     @media (max-width: 520px) {
       .about-stats { grid-template-columns: 1fr 1fr; }
     }
@@ -647,30 +678,35 @@
   <nav>
     <div class="nav-logo">GM<span>.</span>PINA</div>
     <ul class="nav-links">
-      <li><a href="#about">Sobre</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#experience">Experiência</a></li>
-      <li><a href="#education">Formação</a></li>
-      <li><a href="#languages">Idiomas</a></li>
-      <li><a href="#contact" class="nav-cta">Contato</a></li>
+      <li><a href="#about" data-i18n="nav_about">Sobre</a></li>
+      <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
+      <li><a href="#experience" data-i18n="nav_exp">Experiência</a></li>
+      <li><a href="#education" data-i18n="nav_edu">Formação</a></li>
+      <li><a href="#languages" data-i18n="nav_lang">Idiomas</a></li>
+      <li><a href="#contact" class="nav-cta" data-i18n="nav_contact">Contato</a></li>
     </ul>
+    <div class="lang-switcher">
+      <button class="lang-btn active" data-lang="pt" title="Português">PT</button>
+      <button class="lang-btn" data-lang="en" title="English">EN</button>
+      <button class="lang-btn" data-lang="es" title="Español">ES</button>
+    </div>
   </nav>
 
   <!-- HERO -->
   <section id="hero">
     <div class="hero-text">
-      <div class="hero-badge">Disponível para oportunidades</div>
+      <div class="hero-badge" data-i18n="hero_badge">Aberto a novos desafios</div>
       <h1 class="hero-name">
         Gabriel<br>
         Moreira<br>
         <em>Pina</em>
       </h1>
-      <p class="hero-desc">
-        Engenheiro de Computação e pós-graduando em Engenharia de Dados. Com sólida experiência em SQL Server, ETL, Python e análise de dados. Buscando atuar como <strong>Engenheiro de Dados</strong> ou <strong>Analista de Dados</strong>.
+      <p class="hero-desc" data-i18n="hero_desc">
+        Engenheiro de Computação e pós-graduado lato sensu em Engenharia de Dados. Com sólida experiência em SQL Server, ETL, Python e análise de dados. Focado em <strong>Engenharia de Dados</strong> e <strong>Análise de Dados</strong>.
       </p>
       <div class="hero-actions">
-        <a href="#contact" class="btn btn-primary">Entre em contato</a>
-        <a href="#experience" class="btn btn-outline">Ver experiências</a>
+        <a href="#contact" class="btn btn-primary" data-i18n="hero_cta">Entre em contato</a>
+        <a href="#experience" class="btn btn-outline" data-i18n="hero_exp">Ver experiências</a>
       </div>
     </div>
     <div class="hero-visual">
@@ -683,8 +719,8 @@
 
   <!-- SKILLS -->
   <section id="skills">
-    <p class="section-label">Stack técnica</p>
-    <h2 class="section-title">Tecnologias</h2>
+    <p class="section-label" data-i18n="skills_label">Stack técnica</p>
+    <h2 class="section-title" data-i18n="skills_title">Tecnologias</h2>
     <div class="skills-grid" style="margin-bottom: 3rem;">
       <div class="skill-chip"><span class="dot"></span>SQL Server</div>
       <div class="skill-chip"><span class="dot"></span>Python</div>
@@ -705,15 +741,15 @@
       <div class="skill-chip"><span class="dot"></span>Excel</div>
     </div>
 
-    <p class="section-label">Perfil profissional</p>
-    <h2 class="section-title" style="font-size: clamp(1.8rem, 3vw, 2.8rem); margin-bottom: 1.5rem;">Soft Skills</h2>
+    <p class="section-label" data-i18n="soft_label">Perfil profissional</p>
+    <h2 class="section-title" style="font-size: clamp(1.8rem, 3vw, 2.8rem); margin-bottom: 1.5rem;" data-i18n="soft_title">Soft Skills</h2>
     <div class="skills-grid">
-      <div class="skill-chip soft"><span>🎯</span>Organizado</div>
-      <div class="skill-chip soft"><span>💼</span>Forte sentimento de dono</div>
-      <div class="skill-chip soft"><span>🗣️</span>Comunicativo</div>
-      <div class="skill-chip soft"><span>⚡</span>Proativo</div>
-      <div class="skill-chip soft"><span>✅</span>Qualidade no trabalho</div>
-      <div class="skill-chip soft"><span>🔍</span>Curioso</div>
+      <div class="skill-chip soft"><span>🎯</span><span data-i18n="soft_organized">Organizado</span></div>
+      <div class="skill-chip soft"><span>💼</span><span data-i18n="soft_ownership">Forte sentimento de dono</span></div>
+      <div class="skill-chip soft"><span>🗣️</span><span data-i18n="soft_communicative">Comunicativo</span></div>
+      <div class="skill-chip soft"><span>⚡</span><span data-i18n="soft_proactive">Proativo</span></div>
+      <div class="skill-chip soft"><span>✅</span><span data-i18n="soft_quality">Qualidade no trabalho</span></div>
+      <div class="skill-chip soft"><span>🔍</span><span data-i18n="soft_curious">Curioso</span></div>
     </div>
   </section>
 
@@ -721,35 +757,35 @@
   <section id="about">
     <div class="about-grid reveal">
       <div class="about-text">
-        <p class="section-label">Quem sou eu</p>
-        <h2 class="section-title">Sobre mim</h2>
+        <p class="section-label" data-i18n="about_label">Quem sou eu</p>
+        <h2 class="section-title" data-i18n="about_title">Sobre mim</h2>
         <div class="divider"></div>
-        <p>
+        <p data-i18n="about_p1">
           Técnico em Informática, graduado em <strong>Engenharia da Computação</strong> e pós-graduando em <strong>Engenharia de Dados</strong>. Com mais de 6 anos de experiência em TI, atuei em infraestrutura, desenvolvimento de sistemas e, atualmente, como <strong>Analista de Sistemas</strong>.
         </p>
-        <p>
+        <p data-i18n="about_p2">
           Ao longo da carreira, desenvolvi sólida experiência em <strong>SQL Server</strong>, processos de <strong>ETL (SSIS)</strong>, Data Warehousing e análise de causa raiz. Hoje, estou focado em expandir minha atuação em <strong>Python, Power BI</strong> e no ecossistema <strong>Azure</strong> — incluindo Fabric e Synapse Analytics.
         </p>
-        <p>
+        <p data-i18n="about_p3">
           Sou comunicativo, proativo e orientado a resultado, sempre buscando aprendizado contínuo e colaboração com o time.
         </p>
       </div>
       <div class="about-stats">
         <div class="stat-card">
           <div class="stat-number">6+</div>
-          <div class="stat-label">Anos em tecnologia</div>
+          <div class="stat-label" data-i18n="stat_years">Anos em tecnologia</div>
         </div>
         <div class="stat-card">
           <div class="stat-number">4</div>
-          <div class="stat-label">Empresas de experiência</div>
+          <div class="stat-label" data-i18n="stat_companies">Empresas de experiência</div>
         </div>
         <div class="stat-card">
           <div class="stat-number">MBA</div>
-          <div class="stat-label">Engenharia de Dados · Impacta</div>
+          <div class="stat-label" data-i18n="stat_mba">Engenharia de Dados · Impacta</div>
         </div>
         <div class="stat-card">
           <div class="stat-number">DE</div>
-          <div class="stat-label">Buscando oportunidade Eng. / Analista de Dados</div>
+          <div class="stat-label" data-i18n="stat_focus">Foco em Eng. / Análise de Dados</div>
         </div>
       </div>
     </div>
@@ -757,15 +793,15 @@
 
   <!-- EXPERIENCE -->
   <section id="experience">
-    <p class="section-label">Carreira</p>
-    <h2 class="section-title">Experiência Profissional</h2>
+    <p class="section-label" data-i18n="exp_label">Carreira</p>
+    <h2 class="section-title" data-i18n="exp_title">Experiência Profissional</h2>
     <div class="divider"></div>
 
     <div class="timeline reveal">
       <div class="timeline-item">
         <div class="timeline-company">Tecnogera Energia e Equipamentos</div>
-        <div class="timeline-role">Analista de Sistemas · Tempo Integral</div>
-        <ul class="timeline-list">
+        <div class="timeline-role" data-i18n="exp1_role">Analista de Sistemas · Tempo Integral</div>
+        <ul class="timeline-list" data-i18n-list="exp1_items">
           <li>Responsável pelos atendimentos de chamados na plataforma Movidesk</li>
           <li>Responsável pelo ERP Sisloc</li>
           <li>Manutenção e criação de Procedures, Views e Triggers</li>
@@ -779,8 +815,8 @@
 
       <div class="timeline-item">
         <div class="timeline-company">Neogrid Informática LTDA</div>
-        <div class="timeline-role">Analista de Sistemas</div>
-        <ul class="timeline-list">
+        <div class="timeline-role" data-i18n="exp2_role">Analista de Sistemas</div>
+        <ul class="timeline-list" data-i18n-list="exp2_items">
           <li>Atendimento de chamados — Times Nível 1 e Onboarding</li>
           <li>Atuação no cadastro de novos clientes na base de produção</li>
           <li>Análise e manutenção via Banco de Dados SQL Server</li>
@@ -798,8 +834,8 @@
 
       <div class="timeline-item">
         <div class="timeline-company">Paranoá Indústria de Borracha S.A</div>
-        <div class="timeline-role">Estagiário — Desenvolvimento & TI</div>
-        <ul class="timeline-list">
+        <div class="timeline-role" data-i18n="exp3_role">Estagiário — Desenvolvimento & TI</div>
+        <ul class="timeline-list" data-i18n-list="exp3_items">
           <li>Desenvolvimento de aplicações em C#</li>
           <li>Criação e otimização de queries no SQL Server</li>
           <li>Formatação de máquinas e instalação de Sistemas Operacionais</li>
@@ -810,8 +846,8 @@
 
       <div class="timeline-item">
         <div class="timeline-company">Arfrio S.A.</div>
-        <div class="timeline-role">Estagiário — Infraestrutura de TI</div>
-        <ul class="timeline-list">
+        <div class="timeline-role" data-i18n="exp4_role">Estagiário — Infraestrutura de TI</div>
+        <ul class="timeline-list" data-i18n-list="exp4_items">
           <li>Gerenciamento e manutenção de máquinas e softwares corporativos</li>
           <li>Atendimento e suporte presencial e remoto a funcionários</li>
           <li>Acompanhamento de backups de servidores</li>
@@ -824,34 +860,34 @@
 
   <!-- EDUCATION -->
   <section id="education">
-    <p class="section-label">Formação</p>
-    <h2 class="section-title">Educação</h2>
+    <p class="section-label" data-i18n="edu_label">Formação</p>
+    <h2 class="section-title" data-i18n="edu_title">Educação</h2>
     <div class="divider"></div>
 
     <div class="edu-grid reveal">
       <div class="edu-card">
-        <div class="edu-type">Pós-Graduação · MBA</div>
+        <div class="edu-type" data-i18n="edu_type1">Pós-Graduação · MBA</div>
         <div class="edu-institution">Impacta Tecnologia</div>
         <div class="edu-course">MBA Data Engineering</div>
         <div class="edu-course" style="margin-top:0.5rem; color: var(--red); font-size:0.78rem; font-family: var(--font-mono);">Set/2023 — Jan/2025</div>
       </div>
 
       <div class="edu-card">
-        <div class="edu-type">Graduação</div>
+        <div class="edu-type" data-i18n="edu_type2">Graduação</div>
         <div class="edu-institution">Centro Universitário FAM</div>
-        <div class="edu-course">Bacharelado em Engenharia de Computação</div>
+        <div class="edu-course" data-i18n="edu_course2">Bacharelado em Engenharia de Computação</div>
         <div class="edu-course" style="margin-top:0.5rem; color: var(--red); font-size:0.78rem; font-family: var(--font-mono);">Jul/2016 — Dez/2017</div>
       </div>
 
       <div class="edu-card">
-        <div class="edu-type">Curso Técnico</div>
+        <div class="edu-type" data-i18n="edu_type3">Curso Técnico</div>
         <div class="edu-institution">Etec Jucelino Kubitschek de Oliveira</div>
-        <div class="edu-course">Técnico em Informática — Tecnologia da Informação</div>
+        <div class="edu-course" data-i18n="edu_course3">Técnico em Informática — Tecnologia da Informação</div>
         <div class="edu-course" style="margin-top:0.5rem; color: var(--red); font-size:0.78rem; font-family: var(--font-mono);">Jan/2018 — Dez/2022</div>
       </div>
 
       <div class="edu-card" style="grid-column: 1 / -1;">
-        <div class="edu-type">Cursos Complementares</div>
+        <div class="edu-type" data-i18n="edu_type4">Cursos Complementares</div>
         <div class="courses-list">
           <div class="course-item"><span>▸</span><div><strong style="color:var(--white)">Pandas: selecionando e agrupando dados</strong> <span style="color:var(--muted); font-size:0.78rem; margin-left:0.5rem;">Alura · Dez/2025</span></div></div>
           <div class="course-item"><span>▸</span><div><strong style="color:var(--white)">ETL do Zero com API</strong> <span style="color:var(--muted); font-size:0.78rem; margin-left:0.5rem;">Jornada de Dados · Dez/2025</span></div></div>
@@ -882,35 +918,82 @@
 
   <!-- LANGUAGES -->
   <section id="languages" style="background: var(--gray);">
-    <p class="section-label">Comunicação global</p>
-    <h2 class="section-title">Idiomas</h2>
+    <p class="section-label" data-i18n="lang_label">Comunicação global</p>
+    <h2 class="section-title" data-i18n="lang_title">Idiomas</h2>
     <div class="divider"></div>
     <div class="edu-grid reveal" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); max-width: 700px;">
       <div class="edu-card" style="text-align:center;">
-        <div style="font-size:2.5rem; margin-bottom:0.8rem;">🇧🇷</div>
-        <div class="edu-institution">Português</div>
-        <div class="edu-type" style="margin-top:0.4rem; letter-spacing:1px;">Nativo</div>
+        <div style="margin-bottom:0.8rem;">
+          <!-- Bandeira do Brasil -->
+          <svg width="60" height="42" viewBox="0 0 720 504" xmlns="http://www.w3.org/2000/svg" style="border-radius:4px; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+            <rect width="720" height="504" fill="#009c3b"/>
+            <polygon points="360,42 684,252 360,462 36,252" fill="#ffdf00"/>
+            <circle cx="360" cy="252" r="120" fill="#002776"/>
+            <path d="M 232 280 Q 360 200 488 280" fill="none" stroke="#fff" stroke-width="14"/>
+            <rect x="232" y="268" width="256" height="28" fill="#002776"/>
+            <text x="360" y="290" font-family="Arial,sans-serif" font-size="16" font-weight="bold" font-style="italic" fill="#009c3b" text-anchor="middle" letter-spacing="3">ORDEM E PROGRESSO</text>
+            <!-- Estrelas simplificadas -->
+            <circle cx="310" cy="210" r="4" fill="#fff"/><circle cx="340" cy="200" r="3.5" fill="#fff"/>
+            <circle cx="370" cy="205" r="4" fill="#fff"/><circle cx="400" cy="215" r="3.5" fill="#fff"/>
+            <circle cx="290" cy="240" r="3" fill="#fff"/><circle cx="420" cy="240" r="3" fill="#fff"/>
+            <circle cx="300" cy="310" r="4" fill="#fff"/><circle cx="340" cy="320" r="3.5" fill="#fff"/>
+            <circle cx="370" cy="330" r="3" fill="#fff"/><circle cx="400" cy="315" r="3.5" fill="#fff"/>
+            <circle cx="430" cy="300" r="3" fill="#fff"/><circle cx="350" cy="350" r="4" fill="#fff"/>
+            <circle cx="280" cy="280" r="3" fill="#fff"/><circle cx="440" cy="270" r="3" fill="#fff"/>
+            <circle cx="320" cy="340" r="3" fill="#fff"/><circle cx="390" cy="340" r="3" fill="#fff"/>
+            <circle cx="360" cy="160" r="3.5" fill="#fff"/>
+          </svg>
+        </div>
+        <div class="edu-institution" data-i18n="lang_pt">Português</div>
+        <div class="edu-type" style="margin-top:0.4rem; letter-spacing:1px;" data-i18n="lang_pt_level">Nativo</div>
       </div>
       <div class="edu-card" style="text-align:center;">
-        <div style="font-size:2.5rem; margin-bottom:0.8rem;">🇬🇧</div>
-        <div class="edu-institution">Inglês</div>
-        <div class="edu-type" style="margin-top:0.4rem; letter-spacing:1px;">Intermediário · B1</div>
+        <div style="margin-bottom:0.8rem;">
+          <!-- Bandeira dos EUA -->
+          <svg width="60" height="42" viewBox="0 0 1235 650" xmlns="http://www.w3.org/2000/svg" style="border-radius:4px; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+            <rect width="1235" height="650" fill="#fff"/>
+            <rect y="0" width="1235" height="50" fill="#B22234"/>
+            <rect y="100" width="1235" height="50" fill="#B22234"/>
+            <rect y="200" width="1235" height="50" fill="#B22234"/>
+            <rect y="300" width="1235" height="50" fill="#B22234"/>
+            <rect y="400" width="1235" height="50" fill="#B22234"/>
+            <rect y="500" width="1235" height="50" fill="#B22234"/>
+            <rect y="600" width="1235" height="50" fill="#B22234"/>
+            <rect width="494" height="350" fill="#3C3B6E"/>
+            <g fill="#fff">
+              <g id="r1"><circle cx="42" cy="32" r="12"/><circle cx="124" cy="32" r="12"/><circle cx="206" cy="32" r="12"/><circle cx="288" cy="32" r="12"/><circle cx="370" cy="32" r="12"/><circle cx="452" cy="32" r="12"/></g>
+              <g id="r2"><circle cx="83" cy="65" r="12"/><circle cx="165" cy="65" r="12"/><circle cx="247" cy="65" r="12"/><circle cx="329" cy="65" r="12"/><circle cx="411" cy="65" r="12"/></g>
+              <use href="#r1" y="66"/><use href="#r2" y="66"/>
+              <use href="#r1" y="132"/><use href="#r2" y="132"/>
+              <use href="#r1" y="198"/><use href="#r2" y="198"/>
+              <use href="#r1" y="264"/>
+            </g>
+          </svg>
+        </div>
+        <div class="edu-institution" data-i18n="lang_en">Inglês</div>
+        <div class="edu-type" style="margin-top:0.4rem; letter-spacing:1px;" data-i18n="lang_en_level">Intermediário · B1</div>
       </div>
       <div class="edu-card" style="text-align:center;">
-        <div style="font-size:2.5rem; margin-bottom:0.8rem;">🇪🇸</div>
-        <div class="edu-institution">Espanhol</div>
-        <div class="edu-type" style="margin-top:0.4rem; letter-spacing:1px;">Básico</div>
+        <div style="margin-bottom:0.8rem;">
+          <!-- Bandeira da Espanha -->
+          <svg width="60" height="42" viewBox="0 0 750 500" xmlns="http://www.w3.org/2000/svg" style="border-radius:4px; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
+            <rect width="750" height="500" fill="#c60b1e"/>
+            <rect y="125" width="750" height="250" fill="#ffc400"/>
+          </svg>
+        </div>
+        <div class="edu-institution" data-i18n="lang_es">Espanhol</div>
+        <div class="edu-type" style="margin-top:0.4rem; letter-spacing:1px;" data-i18n="lang_es_level">Básico</div>
       </div>
     </div>
   </section>
 
   <!-- CONTACT -->
   <section id="contact">
-    <p class="section-label">Vamos conversar</p>
-    <h2 class="section-title">Contato</h2>
+    <p class="section-label" data-i18n="contact_label">Vamos conversar</p>
+    <h2 class="section-title" data-i18n="contact_title">Contato</h2>
     <div class="divider" style="margin: 0 auto 1.5rem;"></div>
-    <p class="contact-desc">
-      Estou em busca de oportunidades como Engenheiro de Dados ou Analista de Dados. Conecte-se comigo nas redes abaixo!
+    <p class="contact-desc" data-i18n="contact_desc">
+      Interessado em conversar sobre dados, tecnologia ou possíveis colaborações? Conecte-se comigo nas redes abaixo!
     </p>
     <div class="social-row reveal">
       <a href="https://www.linkedin.com/in/gbrmoreira9/" target="_blank" class="social-btn">
@@ -930,11 +1013,309 @@
 
   <!-- FOOTER -->
   <footer>
-    <p>Desenvolvido por Gabriel Moreira Pina</p>
+    <p data-i18n="footer">Desenvolvido por Gabriel Moreira Pina</p>
   </footer>
 
   <script>
-    // Scroll reveal
+    // ── TRANSLATIONS ────────────────────────────────────────────────
+    const translations = {
+      pt: {
+        // Nav
+        nav_about: 'Sobre', nav_skills: 'Skills', nav_exp: 'Experiência',
+        nav_edu: 'Formação', nav_lang: 'Idiomas', nav_contact: 'Contato',
+        // Hero
+        hero_badge: 'Aberto a novos desafios',
+        hero_desc: 'Engenheiro de Computação e pós-graduando em Engenharia de Dados. Com sólida experiência em SQL Server, ETL, Python e análise de dados. Focado em <strong>Engenharia de Dados</strong> e <strong>Análise de Dados</strong>.',
+        hero_cta: 'Entre em contato', hero_exp: 'Ver experiências',
+        // Skills
+        skills_label: 'Stack técnica', skills_title: 'Tecnologias',
+        soft_label: 'Perfil profissional', soft_title: 'Soft Skills',
+        soft_organized: 'Organizado', soft_ownership: 'Forte sentimento de dono',
+        soft_communicative: 'Comunicativo', soft_proactive: 'Proativo',
+        soft_quality: 'Qualidade no trabalho', soft_curious: 'Curioso',
+        // About
+        about_label: 'Quem sou eu', about_title: 'Sobre mim',
+        about_p1: 'Técnico em Informática, graduado em <strong>Engenharia da Computação</strong> e pós-graduando em <strong>Engenharia de Dados</strong>. Com mais de 6 anos de experiência em TI, atuei em infraestrutura, desenvolvimento de sistemas e, atualmente, como <strong>Analista de Sistemas</strong>.',
+        about_p2: 'Ao longo da carreira, desenvolvi sólida experiência em <strong>SQL Server</strong>, processos de <strong>ETL (SSIS)</strong>, Data Warehousing e análise de causa raiz. Hoje, estou focado em expandir minha atuação em <strong>Python, Power BI</strong> e no ecossistema <strong>Azure</strong> — incluindo Fabric e Synapse Analytics.',
+        about_p3: 'Sou comunicativo, proativo e orientado a resultado, sempre buscando aprendizado contínuo e colaboração com o time.',
+        stat_years: 'Anos em tecnologia', stat_companies: 'Empresas de experiência',
+        stat_mba: 'Engenharia de Dados · Impacta', stat_focus: 'Foco em Eng. / Análise de Dados',
+        // Experience
+        exp_label: 'Carreira', exp_title: 'Experiência Profissional',
+        exp1_role: 'Analista de Sistemas · Tempo Integral',
+        exp1_items: [
+          'Responsável pelos atendimentos de chamados na plataforma Movidesk',
+          'Responsável pelo ERP Sisloc',
+          'Manutenção e criação de Procedures, Views e Triggers',
+          'Otimização de consultas SQL',
+          'Direcionamento de causa raiz',
+          'Automação de atividades utilizando o Power Automate',
+          'Desenvolvimento de Dashboards em Power BI',
+          'Desenvolvimento em Python'
+        ],
+        exp2_role: 'Analista de Sistemas',
+        exp2_items: [
+          'Atendimento de chamados — Times Nível 1 e Onboarding',
+          'Atuação no cadastro de novos clientes na base de produção',
+          'Análise e manutenção via Banco de Dados SQL Server',
+          'Análise e direcionamento de melhorias em ETL (SSIS), T-SQL, C# e Java',
+          'Publicação em Produção utilizando o Bamboo',
+          'Vivência com o ambiente Azure',
+          'Atendimento de chamados via JIRA e Azure DevOps',
+          'Levantamento de causas raízes dos chamados abertos',
+          'Documentação de processos internos do time',
+          'Extração de relatórios no banco de dados',
+          'Desenvolvimento de projetos de melhoria',
+          'Manutenção de Procedures, Views e Triggers'
+        ],
+        exp3_role: 'Estagiário — Desenvolvimento & TI',
+        exp3_items: [
+          'Desenvolvimento de aplicações em C#',
+          'Criação e otimização de queries no SQL Server',
+          'Formatação de máquinas e instalação de Sistemas Operacionais',
+          'Organização e controle de IPs na rede interna',
+          'Abertura de Solicitações de Compra no sistema Protheus'
+        ],
+        exp4_role: 'Estagiário — Infraestrutura de TI',
+        exp4_items: [
+          'Gerenciamento e manutenção de máquinas e softwares corporativos',
+          'Atendimento e suporte presencial e remoto a funcionários',
+          'Acompanhamento de backups de servidores',
+          'Coordenação de instalações com empresas terceirizadas',
+          'Emissão de notas, pedidos e contratos no sistema SAP'
+        ],
+        // Education
+        edu_label: 'Formação', edu_title: 'Educação',
+        edu_type1: 'Pós-Graduação · MBA', edu_type2: 'Graduação',
+        edu_type3: 'Curso Técnico', edu_type4: 'Cursos Complementares',
+        edu_course2: 'Bacharelado em Engenharia de Computação',
+        edu_course3: 'Técnico em Informática — Tecnologia da Informação',
+        // Languages
+        lang_label: 'Comunicação global', lang_title: 'Idiomas',
+        lang_pt: 'Português', lang_pt_level: 'Nativo',
+        lang_en: 'Inglês', lang_en_level: 'Intermediário · B1',
+        lang_es: 'Espanhol', lang_es_level: 'Básico',
+        // Contact
+        contact_label: 'Vamos conversar', contact_title: 'Contato',
+        contact_desc: 'Interessado em conversar sobre dados, tecnologia ou possíveis colaborações? Conecte-se comigo nas redes abaixo!',
+        // Footer
+        footer: 'Desenvolvido por Gabriel Moreira Pina'
+      },
+      en: {
+        nav_about: 'About', nav_skills: 'Skills', nav_exp: 'Experience',
+        nav_edu: 'Education', nav_lang: 'Languages', nav_contact: 'Contact',
+        hero_badge: 'Open to new challenges',
+        hero_desc: 'Computer Engineer and Data Engineering postgraduate. With solid experience in SQL Server, ETL, Python and data analysis. Focused on <strong>Data Engineering</strong> and <strong>Data Analytics</strong>.',
+        hero_cta: 'Get in touch', hero_exp: 'View experience',
+        skills_label: 'Tech stack', skills_title: 'Technologies',
+        soft_label: 'Professional profile', soft_title: 'Soft Skills',
+        soft_organized: 'Organized', soft_ownership: 'Strong ownership',
+        soft_communicative: 'Communicative', soft_proactive: 'Proactive',
+        soft_quality: 'Quality-driven', soft_curious: 'Curious',
+        about_label: 'Who am I', about_title: 'About me',
+        about_p1: 'IT Technician, graduated in <strong>Computer Engineering</strong> and postgraduate in <strong>Data Engineering</strong>. With over 6 years of IT experience, I have worked in infrastructure, systems development, and currently as a <strong>Systems Analyst</strong>.',
+        about_p2: 'Throughout my career, I have developed solid experience in <strong>SQL Server</strong>, <strong>ETL (SSIS)</strong> processes, Data Warehousing and root cause analysis. Today, I am focused on expanding my expertise in <strong>Python, Power BI</strong> and the <strong>Azure</strong> ecosystem — including Fabric and Synapse Analytics.',
+        about_p3: 'I am communicative, proactive and results-oriented, always seeking continuous learning and team collaboration.',
+        stat_years: 'Years in technology', stat_companies: 'Companies worked at',
+        stat_mba: 'Data Engineering · Impacta', stat_focus: 'Focus on Data Eng. / Analytics',
+        exp_label: 'Career', exp_title: 'Professional Experience',
+        exp1_role: 'Systems Analyst · Full-time',
+        exp1_items: [
+          'Responsible for ticket management on the Movidesk platform',
+          'Responsible for the Sisloc ERP system',
+          'Maintenance and creation of Procedures, Views and Triggers',
+          'SQL query optimization',
+          'Root cause analysis and resolution',
+          'Activity automation using Power Automate',
+          'Power BI Dashboard development',
+          'Python development'
+        ],
+        exp2_role: 'Systems Analyst',
+        exp2_items: [
+          'Ticket support — Level 1 and Onboarding Teams',
+          'New client registration in the production database',
+          'Analysis and maintenance via SQL Server Database',
+          'Analysis and improvements in ETL (SSIS), T-SQL, C# and Java',
+          'Production deployment using Bamboo',
+          'Experience with Azure environment',
+          'Ticket management via JIRA and Azure DevOps',
+          'Root cause analysis of open tickets',
+          'Internal process documentation for the team',
+          'Database report extraction',
+          'Improvement project development',
+          'Maintenance of Procedures, Views and Triggers'
+        ],
+        exp3_role: 'Intern — Development & IT',
+        exp3_items: [
+          'C# application development',
+          'SQL Server query creation and optimization',
+          'Machine formatting and OS installation',
+          'Internal network IP organization and control',
+          'Purchase requests through Protheus system'
+        ],
+        exp4_role: 'Intern — IT Infrastructure',
+        exp4_items: [
+          'Corporate machine and software management and maintenance',
+          'In-person and remote employee support',
+          'Server backup monitoring',
+          'Installation coordination with third-party companies',
+          'Invoice, order and contract management in SAP'
+        ],
+        edu_label: 'Background', edu_title: 'Education',
+        edu_type1: 'Postgraduate · MBA', edu_type2: "Bachelor's Degree",
+        edu_type3: 'Technical Diploma', edu_type4: 'Additional Courses',
+        edu_course2: "Bachelor's in Computer Engineering",
+        edu_course3: 'IT Technician — Information Technology',
+        lang_label: 'Global communication', lang_title: 'Languages',
+        lang_pt: 'Portuguese', lang_pt_level: 'Native',
+        lang_en: 'English', lang_en_level: 'Intermediate · B1',
+        lang_es: 'Spanish', lang_es_level: 'Basic',
+        contact_label: "Let's talk", contact_title: 'Contact',
+        contact_desc: 'Interested in discussing data, technology or potential collaborations? Connect with me on the platforms below!',
+        footer: 'Developed by Gabriel Moreira Pina'
+      },
+      es: {
+        nav_about: 'Acerca', nav_skills: 'Skills', nav_exp: 'Experiencia',
+        nav_edu: 'Formación', nav_lang: 'Idiomas', nav_contact: 'Contacto',
+        hero_badge: 'Abierto a nuevos desafíos',
+        hero_desc: 'Ingeniero de Computación y posgraduando en Ingeniería de Datos. Con sólida experiencia en SQL Server, ETL, Python y análisis de datos. Enfocado en <strong>Ingeniería de Datos</strong> y <strong>Análisis de Datos</strong>.',
+        hero_cta: 'Contáctame', hero_exp: 'Ver experiencia',
+        skills_label: 'Stack técnico', skills_title: 'Tecnologías',
+        soft_label: 'Perfil profesional', soft_title: 'Soft Skills',
+        soft_organized: 'Organizado', soft_ownership: 'Fuerte sentido de pertenencia',
+        soft_communicative: 'Comunicativo', soft_proactive: 'Proactivo',
+        soft_quality: 'Calidad en el trabajo', soft_curious: 'Curioso',
+        about_label: 'Quién soy', about_title: 'Sobre mí',
+        about_p1: 'Técnico en Informática, graduado en <strong>Ingeniería de la Computación</strong> y posgraduando en <strong>Ingeniería de Datos</strong>. Con más de 6 años de experiencia en TI, trabajé en infraestructura, desarrollo de sistemas y actualmente como <strong>Analista de Sistemas</strong>.',
+        about_p2: 'A lo largo de mi carrera, desarrollé sólida experiencia en <strong>SQL Server</strong>, procesos <strong>ETL (SSIS)</strong>, Data Warehousing y análisis de causa raíz. Hoy, estoy enfocado en expandir mi actuación en <strong>Python, Power BI</strong> y el ecosistema <strong>Azure</strong> — incluyendo Fabric y Synapse Analytics.',
+        about_p3: 'Soy comunicativo, proactivo y orientado a resultados, siempre buscando aprendizaje continuo y colaboración con el equipo.',
+        stat_years: 'Años en tecnología', stat_companies: 'Empresas de experiencia',
+        stat_mba: 'Ingeniería de Datos · Impacta', stat_focus: 'Enfoque en Ing. / Análisis de Datos',
+        exp_label: 'Carrera', exp_title: 'Experiencia Profesional',
+        exp1_role: 'Analista de Sistemas · Tiempo Completo',
+        exp1_items: [
+          'Responsable de la atención de tickets en la plataforma Movidesk',
+          'Responsable del ERP Sisloc',
+          'Mantenimiento y creación de Procedures, Views y Triggers',
+          'Optimización de consultas SQL',
+          'Direccionamiento de causa raíz',
+          'Automatización de actividades utilizando Power Automate',
+          'Desarrollo de Dashboards en Power BI',
+          'Desarrollo en Python'
+        ],
+        exp2_role: 'Analista de Sistemas',
+        exp2_items: [
+          'Atención de tickets — Equipos Nivel 1 y Onboarding',
+          'Registro de nuevos clientes en la base de producción',
+          'Análisis y mantenimiento via Base de Datos SQL Server',
+          'Análisis y mejoras en ETL (SSIS), T-SQL, C# y Java',
+          'Publicación en Producción utilizando Bamboo',
+          'Experiencia con el ambiente Azure',
+          'Atención de tickets via JIRA y Azure DevOps',
+          'Análisis de causas raíz de tickets abiertos',
+          'Documentación de procesos internos del equipo',
+          'Extracción de informes en la base de datos',
+          'Desarrollo de proyectos de mejora',
+          'Mantenimiento de Procedures, Views y Triggers'
+        ],
+        exp3_role: 'Pasante — Desarrollo & TI',
+        exp3_items: [
+          'Desarrollo de aplicaciones en C#',
+          'Creación y optimización de queries en SQL Server',
+          'Formateo de equipos e instalación de Sistemas Operativos',
+          'Organización y control de IPs en la red interna',
+          'Apertura de Solicitudes de Compra en el sistema Protheus'
+        ],
+        exp4_role: 'Pasante — Infraestructura de TI',
+        exp4_items: [
+          'Gestión y mantenimiento de equipos y software corporativos',
+          'Atención y soporte presencial y remoto a empleados',
+          'Acompañamiento de backups de servidores',
+          'Coordinación de instalaciones con empresas tercerizadas',
+          'Emisión de notas, pedidos y contratos en el sistema SAP'
+        ],
+        edu_label: 'Formación', edu_title: 'Educación',
+        edu_type1: 'Posgrado · MBA', edu_type2: 'Grado',
+        edu_type3: 'Curso Técnico', edu_type4: 'Cursos Complementarios',
+        edu_course2: 'Licenciatura en Ingeniería de Computación',
+        edu_course3: 'Técnico en Informática — Tecnología de la Información',
+        lang_label: 'Comunicación global', lang_title: 'Idiomas',
+        lang_pt: 'Portugués', lang_pt_level: 'Nativo',
+        lang_en: 'Inglés', lang_en_level: 'Intermedio · B1',
+        lang_es: 'Español', lang_es_level: 'Básico',
+        contact_label: 'Hablemos', contact_title: 'Contacto',
+        contact_desc: '¿Interesado en conversar sobre datos, tecnología o posibles colaboraciones? ¡Conéctese conmigo en las redes!',
+        footer: 'Desarrollado por Gabriel Moreira Pina'
+      }
+    };
+
+    // ── i18n ENGINE ──────────────────────────────────────────────────
+    function setLanguage(lang) {
+      const t = translations[lang];
+      if (!t) return;
+
+      // Update data-i18n elements
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key] !== undefined) {
+          el.innerHTML = t[key];
+        }
+      });
+
+      // Update data-i18n-list elements (experience lists)
+      document.querySelectorAll('[data-i18n-list]').forEach(ul => {
+        const key = ul.getAttribute('data-i18n-list');
+        if (t[key] && Array.isArray(t[key])) {
+          const items = ul.querySelectorAll('li');
+          t[key].forEach((text, i) => {
+            if (items[i]) items[i].textContent = text;
+          });
+        }
+      });
+
+      // Update html lang attribute
+      document.documentElement.lang = lang === 'pt' ? 'pt-br' : lang;
+
+      // Update page title
+      const titles = {
+        pt: 'Gabriel Moreira Pina — Engenheiro de Dados',
+        en: 'Gabriel Moreira Pina — Data Engineer',
+        es: 'Gabriel Moreira Pina — Ingeniero de Datos'
+      };
+      document.title = titles[lang] || titles.pt;
+
+      // Update active button
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+      });
+
+      // Save preference
+      try { localStorage.setItem('portfolio-lang', lang); } catch(e) {}
+    }
+
+    // ── LANGUAGE SWITCHER ────────────────────────────────────────────
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        setLanguage(btn.getAttribute('data-lang'));
+      });
+    });
+
+    // Auto-detect language on first visit
+    (function() {
+      let saved = null;
+      try { saved = localStorage.getItem('portfolio-lang'); } catch(e) {}
+      if (saved && translations[saved]) {
+        setLanguage(saved);
+      } else {
+        // Detect browser language
+        const browserLang = (navigator.language || navigator.userLanguage || 'pt').toLowerCase();
+        if (browserLang.startsWith('es')) setLanguage('es');
+        else if (browserLang.startsWith('en')) setLanguage('en');
+        // Default is already PT (the HTML content)
+      }
+    })();
+
+    // ── SCROLL REVEAL ────────────────────────────────────────────────
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -945,7 +1326,7 @@
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // Nav active state highlight
+    // ── NAV ACTIVE STATE ─────────────────────────────────────────────
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-links a');
 
